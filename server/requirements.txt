@@ -1,0 +1,10 @@
+// server
+node
+
+
+// Node web framework
+express
+
+
+// automatically running the server after changes
+nodemon
