@@ -1,5 +1,4 @@
-// ignore_for_file: unnecessary_new
-
+import 'package:app/screens/login_register.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const BlogApp());
@@ -9,8 +8,12 @@ class BlogApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return  MaterialApp(
         title: "WeThinkBlogs_",
-        theme: new ThemeData(primarySwatch: Colors.blue));
+
+        theme: ThemeData(primarySwatch: Colors.blue),
+
+        home: const LoginRegister(),
+        );
   }
 }
