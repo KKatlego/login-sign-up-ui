@@ -1,30 +1,38 @@
-const express = require("express");
-var sqlite3 = require("sqlite3").verbose();
+// const { watch } = require("nodemon/lib/monitor");
 
+const express = require("express");
+const sqlite3 = require("sqlite3").verbose();
 const app = express();
 const port = process.env.port || 5000;
 
-var db = new sqlite3.Database("DB");
+app.route("/").get((req, res) =>res.json("fist rest api"))
 
 //connect to database
-db.serialize(function () {
-    // create user table
-    db.run("CREATE TABLE user (id INT, username TEXT)");
-    var stmt = db.prepare("INSERT INTO user VALUES (?,?)");
-    for (var i = 0; i < 10; i++) {
-        var date = new Date();
-        var d = date.toLocaleDateString();
-        stmt.run(i, d);
+const db = new sqlite3.Database("./sample.db", sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        return console.error(err.message);
+    } else {
+        console.log("Conected successfully to the database");
     }
-    // add data to database
-    stmt.finalize();
-
-    // select all users
-    db.each("SELECT id, username FROM user", function (err, row) {
-        console.log("User id : " + row.id, row.username);
-    });
 });
 
-db.close();
+// select all rows
+const sql = `SELECT * FROM users`
+
+
+db.all(sql, [], (err, rows) => {
+    if (err) {
+        return console.error(err.message);
+    } else{
+        rows.forEach(row => console.log(row));
+    }
+});
+
+
+db.close((err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+});
 
 app.listen(port, () => console.log(`listening on port ${port}`));
