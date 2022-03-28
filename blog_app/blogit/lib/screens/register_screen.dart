@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'register_screen.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Login",
+          "Register",
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
@@ -32,6 +32,24 @@ class Contents extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // name text field
+          SizedBox(
+            width: size.width * 0.8,
+            child: TextField(
+                decoration: InputDecoration(
+              prefixIcon: const Icon(
+                Icons.person,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              filled: true,
+              hintStyle: TextStyle(color: Colors.grey[800]),
+              hintText: "Name",
+            )),
+          ),
+          SizedBox(height: size.height * 0.01),
+
           // email text field
           SizedBox(
             width: size.width * 0.8,
@@ -67,11 +85,29 @@ class Contents extends StatelessWidget {
                 )),
           ),
           SizedBox(height: size.height * 0.01),
+
+          SizedBox(
+            width: size.width * 0.8,
+            child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  filled: true,
+                  hintStyle: TextStyle(color: Colors.grey[800]),
+                  hintText: "Confirm Password",
+                )),
+          ),
+          SizedBox(height: size.height * 0.01),
           SizedBox(
               width: size.width * 0.8,
               height: size.height * 0.06,
               child:
-                  // login button
+                  // SIGN UPbutton
                   ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
@@ -85,7 +121,7 @@ class Contents extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: const Text('LOGIN',
+                      child: const Text('SIGN UP',
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       onPressed: () {})),
@@ -93,13 +129,13 @@ class Contents extends StatelessWidget {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
               ),
-              child: const Text("Don't have an account? Sign up",
+              child: const Text("Already have an account? Log in",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => (const RegisterScreen())));
+                        builder: (context) => (const LoginScreen())));
               })
         ],
       ),

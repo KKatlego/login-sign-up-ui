@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'register_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +18,8 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 3.0),
             Text("Nice to see you, let's get blogging.",
-                style: TextStyle(color: Color.fromARGB(255, 114, 114, 114), fontSize: 15.0))
+                style: TextStyle(
+                    color: Color.fromARGB(255, 114, 114, 114), fontSize: 15.0))
           ],
         ),
         backgroundColor: Colors.transparent,
@@ -91,7 +93,12 @@ class Contents extends StatelessWidget {
                         child: const Text('SIGN UP',
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
-                        onPressed: () {})),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => (const RegisterScreen())));
+                        })),
           ]),
     );
   }
