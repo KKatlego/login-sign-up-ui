@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Contents(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Login",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
+      body: const Contents(),
     );
   }
 }
@@ -18,31 +25,77 @@ class Contents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    const String assetName = 'assets/icons/User_Interface_Flatline.svg';
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          "Login",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        SizedBox(height: size.height * 0.05),
-        SvgPicture.asset(assetName, semanticsLabel: 'User login interface'),
-        SizedBox(height: size.height * 0.05),
-        TextField(
-            decoration: InputDecoration(
-          icon: const Icon(
-            Icons.person,
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // email text field
+          SizedBox(
+            width: size.width * 0.8,
+            child: TextField(
+                decoration: InputDecoration(
+              prefixIcon: const Icon(
+                Icons.person,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              filled: true,
+              hintStyle: TextStyle(color: Colors.grey[800]),
+              hintText: "Enter email address",
+            )),
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18.0),
+          SizedBox(height: size.height * 0.01),
+          // password text field
+          SizedBox(
+            width: size.width * 0.8,
+            child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  filled: true,
+                  hintStyle: TextStyle(color: Colors.grey[800]),
+                  hintText: "Enter password",
+                )),
           ),
-          filled: true,
-          hintStyle: TextStyle(color: Colors.grey[800]),
-          hintText: "Enter email address",
-        ))
-      ],
+          SizedBox(height: size.height * 0.01),
+          SizedBox(
+              width: size.width * 0.8,
+              height: size.height * 0.06,
+              child:
+                  // login button
+                  ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromRGBO(104, 225, 253, 1)),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                      ),
+                      child: const Text('LOGIN',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                      onPressed: () {})),
+          TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              ),
+              child: const Text("Don't have an account? Sign up",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              onPressed: () {})
+        ],
+      ),
     );
   }
 }
