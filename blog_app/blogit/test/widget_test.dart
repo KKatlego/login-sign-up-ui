@@ -15,7 +15,7 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
-    expect(find.text('Welcome to BlogIt'), findsOneWidget);
+    expect(find.text('Welcome to Blog It'), findsOneWidget);
     expect(find.text('Hello'), findsNothing);
 
     // Tap the LOGIN button and trigger a frame.
