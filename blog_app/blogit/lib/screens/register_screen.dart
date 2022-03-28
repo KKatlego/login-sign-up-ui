@@ -29,13 +29,14 @@ class Contents extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.center,
+      child: Form(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           // name text field
           SizedBox(
             width: size.width * 0.8,
-            child: TextField(
+            child: TextFormField(
                 decoration: InputDecoration(
               prefixIcon: const Icon(
                 Icons.person,
@@ -53,7 +54,7 @@ class Contents extends StatelessWidget {
           // email text field
           SizedBox(
             width: size.width * 0.8,
-            child: TextField(
+            child: TextFormField(
                 decoration: InputDecoration(
               prefixIcon: const Icon(
                 Icons.email,
@@ -70,7 +71,7 @@ class Contents extends StatelessWidget {
           // password text field
           SizedBox(
             width: size.width * 0.8,
-            child: TextField(
+            child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
@@ -88,7 +89,7 @@ class Contents extends StatelessWidget {
 
           SizedBox(
             width: size.width * 0.8,
-            child: TextField(
+            child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
@@ -139,6 +140,7 @@ class Contents extends StatelessWidget {
               })
         ],
       ),
+      )
     );
   }
 }
