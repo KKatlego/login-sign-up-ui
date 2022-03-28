@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 3.0),
             Text("Nice to see you, let's get blogging.",
-                style: TextStyle(color: Colors.grey, fontSize: 14.0))
+                style: TextStyle(color: Color.fromARGB(255, 114, 114, 114), fontSize: 15.0))
           ],
         ),
         backgroundColor: Colors.transparent,
