@@ -147,7 +147,7 @@ class _ContentsState extends State<Contents> {
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       hintText: "Confirm Password",
                     ),
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     controller: confirmPasswordController,
                     validator: (value) =>
                         value!.isEmpty ? "Confirm Password" : null,

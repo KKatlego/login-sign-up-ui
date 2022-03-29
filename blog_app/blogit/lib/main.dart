@@ -1,4 +1,4 @@
-import 'package:blogit/screens/home_screen.dart';
+import 'package:blogit/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'BlogIt',
       theme: ThemeData(
           primaryColor: Colors.black, scaffoldBackgroundColor: Colors.white),
-      home: const HomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
