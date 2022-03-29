@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'home_screen.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -160,7 +161,7 @@ class _ContentsState extends State<Contents> {
                   width: size.width * 0.8,
                   height: size.height * 0.06,
                   child:
-                      // SIGN UPbutton
+                      // SIGN UP button
                       ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
@@ -178,7 +179,13 @@ class _ContentsState extends State<Contents> {
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            validateAndSave();
+                            if (validateAndSave()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          (const HomeScreen())));
+                            }
                           })),
               TextButton(
                   style: ButtonStyle(

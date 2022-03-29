@@ -1,6 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'home_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -38,6 +39,7 @@ class _ContentsState extends State<Contents> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  
   // String _email = "";
   // String _password = "";
 
@@ -140,7 +142,13 @@ class _ContentsState extends State<Contents> {
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            validateAndSave();
+                            if (validateAndSave()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          (const HomeScreen())));
+                            }
                           })),
               TextButton(
                   style: ButtonStyle(
