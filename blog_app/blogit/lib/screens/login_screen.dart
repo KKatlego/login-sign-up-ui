@@ -1,3 +1,4 @@
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'register_screen.dart';
@@ -29,14 +30,20 @@ class Contents extends StatefulWidget {
 }
 
 class _ContentsState extends State<Contents> {
-  final formKey = GlobalKey<FormState>();
+  // form key
+  final _formKey = GlobalKey<FormState>();
 
-  String _email = "";
-  String _password = "";
+// Controllers
+// Text field updates value and the controller notifies its listeners
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // String _email = "";
+  // String _password = "";
 
   bool validateAndSave() {
     //accessing form via formkey
-    final form = formKey.currentState;
+    final form = _formKey.currentState;
     if (form!.validate()) {
       form.save();
       return true;
@@ -45,11 +52,15 @@ class _ContentsState extends State<Contents> {
     }
   }
 
-// void validateAndSubmit() {
-//   if (validateAndSave()){
-
-//   }
-// }
+  // void validateAndSubmit() {
+  //   if (validateAndSave()) {
+  //     // UserCredential user = await FirebaseAuth.instance
+  //     //     .signInWithEmailAndPassword(email: _email, password: _password);
+  //     print('valid user');
+  //   } else {
+  //     print('user not found');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +68,7 @@ class _ContentsState extends State<Contents> {
     return Container(
         alignment: Alignment.center,
         child: Form(
-          key: formKey,
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -76,9 +87,13 @@ class _ContentsState extends State<Contents> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email address",
                       ),
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      controller: emailController,
                       validator: (value) =>
                           value!.isEmpty ? "Email required" : null,
-                      onSaved: (value) => _email = value!)),
+                      // onSaved: (value) => _email = value!)),
+                      onSaved: (value) => emailController.text = value!)),
               SizedBox(height: size.height * 0.01),
               // password text field
               SizedBox(
@@ -96,9 +111,12 @@ class _ContentsState extends State<Contents> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Password",
                       ),
+                      textInputAction: TextInputAction.done,
+                      controller: passwordController,
                       validator: (value) =>
                           value!.isEmpty ? "Password required" : null,
-                      onSaved: (value) => _password = value!)),
+                      // onSaved: (value) => _password = value!)),
+                      onSaved: (value) => passwordController.text = value!)),
               SizedBox(height: size.height * 0.01),
               SizedBox(
                   width: size.width * 0.8,
