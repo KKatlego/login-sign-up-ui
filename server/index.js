@@ -1,4 +1,4 @@
-// const { watch } = require("nodemon/lib/monitor");
+const { watch } = require("nodemon/lib/monitor");
 
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
@@ -36,3 +36,16 @@ app.route("/").get((req, res) =>res.json("fist rest api"))
 // });
 
 app.listen(port, () => console.log(`listening on port localhost: ${port}`));
+
+
+// const http = require('http');
+// const hostname = 'localhost';
+// const port = 3000;
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end('First Blog\n');
+// });
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });

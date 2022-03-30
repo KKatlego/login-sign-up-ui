@@ -1,5 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'home_screen.dart';
 import 'register_screen.dart';
@@ -39,7 +41,10 @@ class _ContentsState extends State<Contents> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  
+// firebase
+
+  final auth = FirebaseAuth.instance;
+
   // String _email = "";
   // String _password = "";
 
@@ -115,8 +120,14 @@ class _ContentsState extends State<Contents> {
                       ),
                       textInputAction: TextInputAction.done,
                       controller: passwordController,
-                      validator: (value) =>
-                          value!.isEmpty ? "Password required" : null,
+                      validator: (value) {
+                        RegExp regex = RegExp(r'^.{6,}$');
+                        value!.isEmpty ? "Password required" : null;
+                        if (!regex.hasMatch(value)) {
+                          return ("Valid password: 6 or more characters required");
+                        }
+                        return null;
+                      },
                       // onSaved: (value) => _password = value!)),
                       onSaved: (value) => passwordController.text = value!)),
               SizedBox(height: size.height * 0.01),
@@ -142,13 +153,8 @@ class _ContentsState extends State<Contents> {
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            if (validateAndSave()) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          (const HomeScreen())));
-                            }
+                            validateAndSignIn(
+                                emailController.text, passwordController.text);
                           })),
               TextButton(
                   style: ButtonStyle(
@@ -167,5 +173,20 @@ class _ContentsState extends State<Contents> {
             ],
           ),
         ));
+  }
+
+  void validateAndSignIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: 'Login successful'),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const HomeScreen()))
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart';
+import 'package:http/http.dart';
 import 'welcome_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class Contents extends StatefulWidget {
 }
 
 class _ContentsState extends State<Contents> {
-    // String serverResponse = 'Server response';
+  String serverResponse = 'Server response';
   @override
   Widget build(BuildContext context) {
     // total height and width of screen
@@ -48,7 +48,7 @@ class _ContentsState extends State<Contents> {
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(221, 172, 172, 172)),
+                          const Color.fromARGB(221, 172, 172, 172)),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.black),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -61,7 +61,8 @@ class _ContentsState extends State<Contents> {
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                     onPressed: () {
-// _makeGetRequest;
+                      print('hello');
+                      _makeGetRequest();
                     })),
         SizedBox(
             width: size.width * 0.8,
@@ -92,17 +93,30 @@ class _ContentsState extends State<Contents> {
       ]),
     );
   }
-  //   _makeGetRequest() async {
-  //   final url = Uri.parse(_localhost());
-  //   Response response = await get(url);
-  //   setState(() {
-  //     serverResponse = response.body;
-  //   });
-  // }
 
-  // String _localhost() {
-  //     return 'http://localhost:5000';
+  _makeGetRequest() async {
+
+    final url = Uri.parse(_localhost());
+    Response response = await get(url);
+
+    setState(() {
+      serverResponse = response.body;
+    });
+  }
+
+  String _localhost() {
+    return 'http://localhost:3000/';
+  }
+
+  // _makeGetRequest() async {
+  //     print("almost in");
+
+  //   final response = await http.get(Uri.parse("http://localhost:3000"));
+  //   if (response.statusCode == 200) {
+  //     return (response.body);
+  //     print("in");
+  //   } else {
+  //     throw Exception("Failed to get blogs");
+  //   }
   // }
 }
-
-
