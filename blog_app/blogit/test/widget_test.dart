@@ -14,16 +14,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('Welcome to Blog It'), findsOneWidget);
+    expect(find.text('BlogIt'), findsOneWidget);
     expect(find.text('Hello'), findsNothing);
-
-    // Tap the LOGIN button and trigger a frame.
-    await tester.tap(find.text('LOGIN'));
-    await tester.pump();
-
-    // Tap the SIGN UP button and trigger a frame.
-    await tester.tap(find.text('SIGN UP'));
-    await tester.pump();
   });
 }
