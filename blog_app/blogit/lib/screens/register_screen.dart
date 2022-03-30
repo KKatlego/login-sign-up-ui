@@ -139,7 +139,6 @@ class _ContentsState extends State<Contents> {
                       if (!regex.hasMatch(value)) {
                         return ("Valid password: 6 or more characters required");
                       }
-                      return null;
                     },
                     // onSaved: (value) => _email = value!)),
                     onSaved: (value) => passwordController.text = value!),
@@ -164,11 +163,9 @@ class _ContentsState extends State<Contents> {
                     textInputAction: TextInputAction.done,
                     controller: confirmPasswordController,
                     validator: (value) {
-                      if (confirmPasswordController.text.length > 6 &&
-                          passwordController.text != value) {
+                      if (confirmPasswordController.text !=
+                          passwordController.text) {
                         return ('Passwords do not match');
-                      } else {
-                        return null;
                       }
                     },
                     // onSaved: (value) => _email = value!)),

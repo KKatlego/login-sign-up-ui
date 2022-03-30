@@ -126,7 +126,6 @@ class _ContentsState extends State<Contents> {
                         if (!regex.hasMatch(value)) {
                           return ("Valid password: 6 or more characters required");
                         }
-                        return null;
                       },
                       // onSaved: (value) => _password = value!)),
                       onSaved: (value) => passwordController.text = value!)),

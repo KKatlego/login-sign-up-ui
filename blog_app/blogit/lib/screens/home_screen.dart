@@ -57,7 +57,7 @@ class _ContentsState extends State<Contents> {
                         ),
                       ),
                     ),
-                    child: const Text('Click here to connect to server',
+                    child: const Text('New blog',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                     onPressed: () {
