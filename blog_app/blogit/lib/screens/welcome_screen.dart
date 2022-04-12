@@ -13,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
           children: const [
             SizedBox(height: 10.0),
             Text(
-              "Welcome to Blog It",
+              "Welcome to BlogIt",
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(height: 3.0),

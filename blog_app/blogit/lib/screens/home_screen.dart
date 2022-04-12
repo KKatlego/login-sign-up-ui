@@ -1,3 +1,7 @@
+import 'package:blogit/model/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'welcome_screen.dart';
@@ -7,10 +11,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Home",
+          'BlogIt',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
@@ -29,7 +34,23 @@ class Contents extends StatefulWidget {
 }
 
 class _ContentsState extends State<Contents> {
-  String serverResponse = 'Server response';
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel(email: '', name: '', uid: '');
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+  // String serverResponse = 'Server response';
+
   @override
   Widget build(BuildContext context) {
     // total height and width of screen
@@ -38,32 +59,8 @@ class _ContentsState extends State<Contents> {
       alignment: Alignment.center,
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
           Widget>[
-        const SizedBox(child: Text('blogs')),
-        SizedBox(height: size.height * 0.02),
-        SizedBox(
-            width: size.width * 0.8,
-            height: size.height * 0.06,
-            child:
-                // login button
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(221, 172, 172, 172)),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    child: const Text('New blog',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      print('hello');
-                      _makeGetRequest();
-                    })),
+        SizedBox(child: Text("Hello "+ loggedInUser.name)),
+        SizedBox(height: size.height * 0.50),
         SizedBox(
             width: size.width * 0.8,
             height: size.height * 0.06,
@@ -85,6 +82,7 @@ class _ContentsState extends State<Contents> {
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                     onPressed: () {
+                      logout(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -94,19 +92,23 @@ class _ContentsState extends State<Contents> {
     );
   }
 
-  _makeGetRequest() async {
-
-    final url = Uri.parse(_localhost());
-    Response response = await get(url);
-
-    setState(() {
-      serverResponse = response.body;
-    });
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
   }
 
-  String _localhost() {
-    return 'http://localhost:3000/';
-  }
+  // _makeGetRequest() async {
+
+  //   final url = Uri.parse(_localhost());
+  //   Response response = await get(url);
+
+  //   setState(() {
+  //     serverResponse = response.body;
+  //   });
+  // }
+
+  // String _localhost() {
+  //   return 'http://localhost:3000/';
+  // }
 
   // _makeGetRequest() async {
   //     print("almost in");

@@ -8,9 +8,5 @@ void main() {
 
     expect(find.text('Home'), findsOneWidget);
 
-
-    // Tap the SIGN UP button and trigger a frame.
-    await tester.tap(find.text('LOGOUT'));
-    await tester.pump();
   });
 }
