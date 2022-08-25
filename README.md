@@ -1,2 +1,2 @@
-# blog-app
-Blog app created using node.js and flutter
+# Log in and Sign up User Interface
+Created using firebase (user authentication) and flutter
